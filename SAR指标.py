@@ -18,14 +18,16 @@ import math
 #    sys.exit(2)
 code = "002153"
 df = ts.get_k_data(code)
-df = df[ df['date'] > '2020-01-01']
+df = df[ df['date'] > '2020-08-20']
 print(df)
-if len(df) <10:
+if len(df) <5:
     print(" len(df) <10 ")
     sys.exit(2)
 
 print(df.values[:,2].tolist())
 print(df.values.tolist())
+print(df.high)
+print(df.low)
 # SAR，Stop and Reverse，是 Welles Wilder发明的，SAR是一个基于价格/时间的指标.
 sar = talib.SAR(df.high, df.low)
 #print(sar[-100:])
@@ -43,4 +45,4 @@ df.index = pd.to_datetime(df.date)
 df[['close','ma10']].plot(grid=True, title=code)
 plt.plot(df.index, sar, '.',c='black', label='sar')
 plt.legend(loc='best', shadow=True)
-plt.show()
+#plt.show()
